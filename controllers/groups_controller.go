@@ -16,18 +16,33 @@ type GroupsController struct {
 	DB db.Database
 }
 
+// swagger:route GET /groups Lists groups
+//
+// Lists groups
+//
+// This will show all registered groups by default
+//
+//     Consumes:
+//     - application/json
+//
+//     Produces:
+//     - application/json
+//
+//     Responses:
+//       200: groups
 func (c *GroupsController) Index(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
-	var groups models.Groups
-
 	groupsCollection, err := c.DB.Collection("groups")
 	if err != nil {
 		log.Fatalf("DB.Collection(): %q\n", err)
 	}
 
+	var groups models.Groups
 	res := groupsCollection.Find()
 	res.All(&groups)
 
-	c.JSON(w, http.StatusOK, groups)
+	c.JSON(w, http.StatusOK, map[string]interface{}{
+		"groups": groups,
+	})
 }
 
 func (c *GroupsController) Create(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {

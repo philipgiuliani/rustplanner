@@ -6,4 +6,6 @@ type Group struct {
 	Password string `json:"password"`
 }
 
+// Shit
+// swagger:response groups
 type Groups []Group
