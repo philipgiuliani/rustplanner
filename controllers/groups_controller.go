@@ -6,10 +6,14 @@ import (
 
 	"github.com/julienschmidt/httprouter"
 	"github.com/philipgiuliani/rustplanner/models"
+	"github.com/unrolled/render"
+	"upper.io/db.v2"
 )
 
 type GroupsController struct {
 	BaseController
+	*render.Render
+	DB db.Database
 }
 
 // swagger:route GET /groups Lists groups
