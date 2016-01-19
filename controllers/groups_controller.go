@@ -11,19 +11,14 @@ import (
 )
 
 type GroupsController struct {
-	AppController
+	BaseController
 	*render.Render
 	DB db.Database
 }
 
 // swagger:route GET /groups Lists groups
 //
-// Lists groups
-//
 // This will show all registered groups by default
-//
-//     Consumes:
-//     - application/json
 //
 //     Produces:
 //     - application/json
@@ -45,6 +40,15 @@ func (c *GroupsController) Index(w http.ResponseWriter, r *http.Request, _ httpr
 	})
 }
 
+// swagger:route POST /groups Creates a new group
+//
+// This will create a new group
+//
+//     Produces:
+//     - application/json
+//
+//     Responses:
+//       200: group
 func (c *GroupsController) Create(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	c.JSON(w, http.StatusOK, nil)
 }
