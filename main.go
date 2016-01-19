@@ -52,7 +52,7 @@ func main() {
 	// router
 	router := httprouter.New()
 
-	groupsController := &controllers.GroupsController{Render: r, DB: sess}
+	groupsController := controllers.NewGroupsController(r, sess)
 	router.GET("/api/v1/groups.json", groupsController.Index)
 	router.POST("/api/v1/groups.json", groupsController.Create)
 

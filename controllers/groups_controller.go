@@ -16,6 +16,10 @@ type GroupsController struct {
 	DB db.Database
 }
 
+func NewGroupsController(render *render.Render, sess db.Database) *GroupsController {
+	return &GroupsController{Render: render, DB: sess}
+}
+
 // swagger:route GET /groups Lists groups
 //
 // This will show all registered groups by default
