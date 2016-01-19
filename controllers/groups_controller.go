@@ -7,7 +7,7 @@ import (
 	"github.com/julienschmidt/httprouter"
 	"github.com/philipgiuliani/rustplanner/models"
 	"github.com/unrolled/render"
-	"upper.io/db"
+	"upper.io/db.v2"
 )
 
 type GroupsController struct {
