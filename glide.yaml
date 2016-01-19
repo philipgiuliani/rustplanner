@@ -1,0 +1,9 @@
+package: github.com/philipgiuliani/rustplanner
+import:
+- package: github.com/codegangsta/negroni
+- package: github.com/julienschmidt/httprouter
+- package: github.com/unrolled/render
+- package: upper.io/db
+  version: v2
+  subpackages:
+  - sqlite

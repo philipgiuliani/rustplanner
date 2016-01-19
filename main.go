@@ -36,8 +36,8 @@ import (
 	"github.com/julienschmidt/httprouter"
 	"github.com/philipgiuliani/rustplanner/controllers"
 	"github.com/unrolled/render"
-	"upper.io/db.v2"
-	"upper.io/db.v2/sqlite"
+	"upper.io/db"
+	"upper.io/db/sqlite"
 )
 
 var dbSettings = sqlite.ConnectionURL{
