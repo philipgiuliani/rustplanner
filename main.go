@@ -29,6 +29,8 @@ package main
 
 import (
 	"log"
+	"os"
+	"strconv"
 
 	"github.com/codegangsta/negroni"
 	"github.com/julienschmidt/httprouter"
@@ -66,5 +68,19 @@ func main() {
 	router.POST("/api/v1/groups.json", groupsController.Create)
 
 	n.UseHandler(router)
-	n.Run(":3000")
+	n.Run(":" + strconv.Itoa(getPort()))
+}
+
+func getPort() int {
+	defaultPort := 3000
+	envPort := os.Getenv("PORT")
+	if envPort == "" {
+		return defaultPort
+	}
+
+	port, err := strconv.Atoi(envPort)
+	if err != nil {
+		return defaultPort
+	}
+	return port
 }

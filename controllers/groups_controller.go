@@ -26,14 +26,13 @@ type GroupsController struct {
 //     Responses:
 //       200: groups
 func (c *GroupsController) Index(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
-	groupsCollection, err := c.DB.Collection("groups")
+	col, err := c.DB.Collection("groups")
 	if err != nil {
 		log.Fatalf("DB.Collection(): %q\n", err)
 	}
 
 	var groups models.Groups
-	res := groupsCollection.Find()
-	res.All(&groups)
+	col.Find().Where("name", "cortex").All(&groups)
 
 	c.JSON(w, http.StatusOK, map[string]interface{}{
 		"groups": groups,
@@ -50,5 +49,11 @@ func (c *GroupsController) Index(w http.ResponseWriter, r *http.Request, _ httpr
 //     Responses:
 //       200: group
 func (c *GroupsController) Create(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
-	c.JSON(w, http.StatusOK, nil)
+	group := &models.Group{
+		Name: "cortex",
+	}
+
+	c.JSON(w, http.StatusOK, map[string]interface{}{
+		"group": group,
+	})
 }
