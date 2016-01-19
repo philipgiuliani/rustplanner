@@ -39,7 +39,7 @@ func (c *GroupsController) Index(w http.ResponseWriter, r *http.Request, _ httpr
 	})
 }
 
-// swagger:route POST /groups Creates a new group
+// swagger:route POST /groups Create group
 //
 // This will create a new group
 //
