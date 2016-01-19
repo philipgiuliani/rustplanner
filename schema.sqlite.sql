@@ -1,0 +1,5 @@
+CREATE TABLE groups (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name VARCHAR(80),
+  password VARCHAR(80)
+);
