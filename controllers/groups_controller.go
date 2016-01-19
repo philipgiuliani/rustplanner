@@ -36,7 +36,7 @@ func (c *GroupsController) Index(w http.ResponseWriter, r *http.Request, _ httpr
 	}
 
 	var groups models.Groups
-	col.Find().Where("name", "cortex").All(&groups)
+	col.Find().Where("name LIKE ?", "cortex%").All(&groups)
 
 	c.JSON(w, http.StatusOK, map[string]interface{}{
 		"groups": groups,
@@ -54,10 +54,21 @@ func (c *GroupsController) Index(w http.ResponseWriter, r *http.Request, _ httpr
 //       200: group
 func (c *GroupsController) Create(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	group := &models.Group{
-		Name: "cortex",
+		Name:     "cortex2",
+		Password: "new",
+	}
+
+	col, err := c.DB.Collection("groups")
+	if err != nil {
+		log.Fatalf("DB.Collection(): %q\n", err)
+	}
+
+	created, err := col.Append(group)
+	if err != nil {
+		log.Fatalf("col.Append: %q\n", err)
 	}
 
 	c.JSON(w, http.StatusOK, map[string]interface{}{
-		"group": group,
+		"group": created,
 	})
 }
