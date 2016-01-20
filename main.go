@@ -28,10 +28,6 @@ import (
 	"upper.io/db.v2/sqlite"
 )
 
-var dbSettings = sqlite.ConnectionURL{
-	Database: "test.db",
-}
-
 func main() {
 	// render
 	r := render.New(render.Options{})
@@ -43,7 +39,9 @@ func main() {
 	)
 
 	// database
-	sess, err := db.Open(sqlite.Adapter, dbSettings)
+	sess, err := db.Open(sqlite.Adapter, sqlite.ConnectionURL{
+		Database: "test.db",
+	})
 	if err != nil {
 		log.Fatal(err)
 	}
